@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<title>Grids</title>
+</head>
+<body>
+	<button type="button" id="reset-button">Reset</button><br><br><br>
+	<div id = "container">
+	</div>
+<script>
+let gridSize = prompt("How big of a grid would you like to begin with?");
+let gridBlock = 960 / gridSize + "px"
+function drawGrid() {
+
+	for (i = 1; i <= gridSize; i++) {
+    const row = document.createElement("div")
+    row.className = "row"
+    row.id = "id" + i
+    row.addEventListener("mouseover", function () {
+        row.style.backgroundColor = "green"
+    })
+    container.appendChild(row)
+    for (j = 1; j <= gridSize; j++) {
+        const boxes = document.createElement("div")
+        boxes.className = "boxes"
+        boxes.id = "id-" + i + "-" + j
+        boxes.style.height = gridBlock
+        boxes.style.width = gridBlock
+        boxes.addEventListener("mouseover", function () {
+            boxes.style.backgroundColor = "green"
+        })
+        container.appendChild(boxes)
+    }
+}
+}
+
+drawGrid()
+
+//document.getElementById("reset-button").addEventListener("click", reset)
+
+document.getElementById("reset-button").addEventListener("click", changeGrid)
+
+//function reset() {
+//    const allBoxes = document.querySelectorAll(".boxes")
+//    allBoxes.forEach(function (box) {
+//        box.removeAttribute("style")
+//    })
+
+//}
+
+function changeGrid() {
+	gridSize = prompt("How big of a grid would you like to change to?")
+    const allBoxes = document.querySelectorAll(".boxes")
+    allBoxes.forEach(function (box) {
+        container.removeChild(box)
+    })
+    const allRows = document.querySelectorAll(".row")
+    allRows.forEach(function (row) {
+        container.removeChild(row)
+    })
+	gridBlock = 960 / gridSize + "px"
+	drawGrid()
+}
+
+
+</script>
+</body>
+</html>
